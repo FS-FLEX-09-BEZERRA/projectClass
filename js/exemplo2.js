@@ -39,15 +39,25 @@ function login() {
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
 
-  for (let i = 0; i < BDUser.length;) {  
+
+let naoEncontrado = true
+let tentativas = 3
+  for (let i = 0; i < BDUser.length;i++) {
     console.log("usuario:", BDUser[i])
-  if (email === BDUser[i].email && password === BDUser[i].password) {
-    alert("Login efetuado com sucesso")
-    break;
+    if (email === BDUser[i].email && password === BDUser[i].password) {
+      alert("Login efetuado com sucesso")
+      naoEncontrado = false
+      break;
+    } 
   }
-  i++
-  if (i === BDUser.length) {
-    alert("Email ou senha incorretos")
+  console.log(naoEncontrado)
+  while (tentativas >= 1) {
+    if (naoEncontrado) {
+    alert("email ou senha incorretos")
+    tentativas--
+    }
+    if (tentativas === 0) {
+    alert("Você excedeu o número de tentativas. Tente novamente daqui 10 minutos")
+    }
   }
-}
 }
