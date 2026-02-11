@@ -45,19 +45,19 @@ let tentativas = 3
   for (let i = 0; i < BDUser.length;i++) {
     console.log("usuario:", BDUser[i])
     if (email === BDUser[i].email && password === BDUser[i].password) {
-      alert("Login efetuado com sucesso")
+      window.location.href = "../pages/dashboard.html"
       naoEncontrado = false
       break;
     } 
   }
   console.log(naoEncontrado)
-  while (tentativas >= 1) {
-    if (naoEncontrado) {
+  if (naoEncontrado) {
+    while (tentativas >= 1) {
     alert("email ou senha incorretos")
     tentativas--
-    }
     if (tentativas === 0) {
     alert("Você excedeu o número de tentativas. Tente novamente daqui 10 minutos")
     }
-  }
+    }
+}
 }

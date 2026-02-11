@@ -42,7 +42,7 @@ function login() {
   for (let i = 0; i < BDUser.length;) {  
     console.log("usuario:", BDUser[i])
   if (email === BDUser[i].email && password === BDUser[i].password) {
-    alert("Login efetuado com sucesso")
+    window.location.href = './pages/dashboard.html'
     break;
   }
   i++
