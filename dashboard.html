@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <title>Dashboard</title>
 </head>
-<body class="bg-gray-950 text-gray-200 p-8">
+<body class="bg-gray-950 text-gray-200 p-8 h-screen">
 
   <main class="max-w-6xl mx-auto bg-gray-900 shadow-2xl rounded-2xl overflow-hidden border border-purple-800">
 
-    <div class="p-6 border-b border-purple-800 bg-gray-900">
+    <div class="p-6 border-b border-purple-800 bg-gray-900 flex justify-between">
       <h2 class="text-2xl font-bold text-purple-400">Lista de Alunos</h2>
+      <button class="btn btn-outline btn-primary">Adicionar aluno</button>
     </div>
 
     <div class="overflow-x-auto">
