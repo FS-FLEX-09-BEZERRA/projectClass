@@ -46,7 +46,7 @@ tabela.innerHTML = alunos.map((aluno, index) => {
   const statusStyle = {
     "Ativo": "bg-purple-600/20 text-purple-400",
     "Trancado": "bg-yellow-600/20 text-yellow-400",
-    "Formando": "bg-blue-600/20 text-blue-400"
+    "Formado": "bg-blue-600/20 text-blue-400"
   };
 
   return `
@@ -75,3 +75,20 @@ tabela.innerHTML = alunos.map((aluno, index) => {
     </tr>
   `;
 }).join("");
+
+function handleAdd () {
+  const nome = document.getElementById("nome").value
+  const matricula = document.getElementById("matricula").value
+  const curso = document.getElementById("curso").value
+  const idade = document.getElementById("idade").value
+  
+  const novoId = alunos.length + 1
+  
+  const novoAluno = { novoId, nome, matricula, curso, idade, ativo: true }
+
+  console.log(novoAluno)
+
+
+  alunos.push(novoAluno)
+  return
+}
