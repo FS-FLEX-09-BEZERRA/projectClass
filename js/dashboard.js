@@ -1,4 +1,4 @@
-const tabela = document.getElementById('tabela')
+
 
 
 const alunos = [
@@ -36,9 +36,11 @@ const alunos = [
   }
 ];
 
+carregarAlunos()
 
+
+function carregarAlunos () {
 tabela.innerHTML = alunos.map((aluno, index) => {
-
   const rowBg = index % 2 === 0
     ? "bg-[#0F172A]"
     : "bg-[#111827]";
@@ -50,9 +52,9 @@ tabela.innerHTML = alunos.map((aluno, index) => {
   };
 
   return `
-    <tr class="grid grid-cols-6 items-center px-8 py-5 border-b border-purple-900/20 ${rowBg} hover:bg-purple-900/20 transition duration-300">
+    <tr key=${index} class="grid grid-cols-6 items-center px-8 py-5 border-b border-purple-900/20 ${rowBg} hover:bg-purple-900/20 transition duration-300">
       <td class="flex items-center gap-3 font-medium text-white">
-        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-violet-500 
+        <div class="w-9 h-9 rounded-full bg-linear-to-br from-purple-600 to-violet-500 
                     flex items-center justify-center text-xs font-bold">
           ${aluno.nome.split(" ").map(n => n[0]).join("").slice(0, 2)}
         </div>
@@ -69,26 +71,63 @@ tabela.innerHTML = alunos.map((aluno, index) => {
         </span>
       </td>
 
-      <td class="text-right text-gray-500 hover:text-purple-400 cursor-pointer transition">
-        ▾
+      <td class="text-left text-gray-500 hover:text-purple-400 cursor-pointer transition">
+        <i class="fa-regular fa-pen-to-square" onclick="handleEdit(${aluno.id})"></i>
       </td>
     </tr>
   `;
 }).join("");
+}
 
 function handleAdd () {
+  const tabela = document.getElementById('tabela')
   const nome = document.getElementById("nome").value
   const matricula = document.getElementById("matricula").value
   const curso = document.getElementById("curso").value
   const idade = document.getElementById("idade").value
+  const modal = document.getElementById("my_modal_2")
   
   const novoId = alunos.length + 1
   
-  const novoAluno = { novoId, nome, matricula, curso, idade, ativo: true }
+  const novoAluno = { id: novoId, nome, matricula, curso, idade, status: "Ativo" }
 
   console.log(novoAluno)
 
 
   alunos.push(novoAluno)
+  modal.style.display = "none";
+  console.log(alunos)
+  carregarAlunos()
   return
+}
+
+function handleEdit (id) {
+  const tabela = document.getElementById('tabela')
+  const nome = document.getElementById("nome")
+  const matricula = document.getElementById("matricula")
+  const curso = document.getElementById("curso")
+  const idade = document.getElementById("idade")
+  const modal = document.getElementById("my_modal_2")
+  const buttonSalvar = document.getElementById("buttonSalvar")
+
+  console.log(id)
+  const aluno = alunos.find((a)=> a.id === id)
+  console.log(aluno)
+  const titleModal = document.querySelector("#titleModal")
+  console.log(titleModal)
+  titleModal.innerHTML = "Editar Aluno"
+
+
+    nome.value = aluno.nome,
+    matricula.value = aluno.matricula,
+    curso.value = aluno.curso,
+    idade.value = aluno.idade,
+    status.value = aluno.status
+
+    buttonSalvar.onclick
+
+  modal.showModal()
+
+
+  console.log(titleModal)
 }

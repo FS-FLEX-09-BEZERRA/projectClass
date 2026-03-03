@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard</title>
 </head>
+
 <body class="bg-gray-950 text-gray-200 p-8 h-screen">
 
   <main class="max-w-6xl mx-auto  shadow-2xl rounded-2xl overflow-hidden border-none">
 
     <div class="p-6 border-b border-none flex justify-between">
-      <h1 class="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-violet-400 bg-clip-text text-transparent">
+      <h1 class="text-3xl font-bold mb-6 bg-linear-to-r from-purple-500 to-violet-400 bg-clip-text text-transparent">
         Alunos Matriculados
       </h1>
       <button class="btn shadow-none border-purple-900 text-violet-400 bg-purple-900" onclick="my_modal_2.showModal()">Adicionar Aluno</button>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box bg-gray-700/80">
-          <h1 class="font-bold text-2xl mb-3 text-purple-500">Adicionar aluno</h1>
+          <h1 id="titleModal" class="font-bold text-2xl mb-3 text-purple-500">Adicionar aluno</h1>
           <form>
             <input id="nome" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="text" placeholder="Digite o nome do aluno">
             <input id="matricula" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="text" placeholder="Digite o número de matrícula">
             <input id="curso" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="text" placeholder="Digite o curso">
             <input id="idade" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="number" placeholder="Digite a idade do aluno">
-            <div class="flex justify-end gap-3">
+              <div class="flex justify-end gap-3">
                 <button type="button" class="btn border-purple-900 text-violet-400 bg-purple-600/10 shadow-none">Cancelar</button>
-                <button type="button" onclick="handleAdd()" class="btn border-purple-900 text-violet-400 bg-purple-900 shadow-none">Salvar</button>
-            </div>
+                <button id="buttonSalvar" type="button" onclick="handleAdd()" class="btn border-purple-900 text-violet-400 bg-purple-900 shadow-none">Salvar</button>
+              </div>
           </form>
         </div>
-        <form method="dialog" class="modal-backdrop">
-          <button>close</button>
-        </form>
       </dialog>
     </div>
 
@@ -40,12 +40,13 @@
       <table class="min-w-full">
 
         <thead>
-          <tr class="grid grid-cols-6 px-8 py-4 text-sm text-gray-400 border-b border-purple-900/30 bg-gradient-to-r from-[#111827] to-purple-900/20">
-            <th class="px-6 py-3 text-left">Nome</th>
-            <th class="px-6 py-3 text-left">Matrícula</th>
-            <th class="px-6 py-3 text-left">Curso</th>
-            <th class="px-6 py-3 text-left">Idade</th>
-            <th class="px-6 py-3 text-left">Status</th>
+          <tr class="grid grid-cols-6 px-8 py-4 text-sm text-gray-400 border-b border-purple-900/30 bg-linear-to-r from-[#111827] to-purple-900/20">
+            <th class=" py-3 text-left">Nome</th>
+            <th class=" py-3 text-left">Matrícula</th>
+            <th class=" py-3 text-left">Curso</th>
+            <th class=" py-3 text-left">Idade</th>
+            <th class=" py-3 text-left">Status</th>
+            <th class=" py-3 text-left">Ações</th>
           </tr>
         </thead>
 
@@ -59,4 +60,5 @@
 
   <script src="./js/dashboard.js"></script>
 </body>
+
 </html>
