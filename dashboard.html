@@ -18,7 +18,14 @@
       <h1 class="text-3xl font-bold mb-6 bg-linear-to-r from-purple-500 to-violet-400 bg-clip-text text-transparent">
         Alunos Matriculados
       </h1>
-      <button class="btn shadow-none border-purple-900 text-violet-400 bg-purple-900" onclick="my_modal_2.showModal()">Adicionar Aluno</button>
+      <div class="flex gap-3">
+        <select onchange="handleStatus()" name="status" id="statusFilter" class="bg-gray-900 w-1/2 p-2 rounded-md h-fit border-purple-950 outline-none">
+          <option selected value="Ativo">Ativo</option>
+          <option value="Trancado">Trancado</option>
+          <option value="Formado">Formado</option>
+        </select>
+        <button class="btn shadow-none border-purple-900 text-violet-400 bg-purple-900" onclick="my_modal_2.showModal()">Adicionar Aluno</button>
+      </div>
       <dialog id="my_modal_2" class="modal">
         <div class="modal-box bg-gray-700/80">
           <h1 id="titleModal" class="font-bold text-2xl mb-3 text-purple-500">Adicionar aluno</h1>
@@ -27,8 +34,13 @@
             <input id="matricula" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="text" placeholder="Digite o número de matrícula">
             <input id="curso" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="text" placeholder="Digite o curso">
             <input id="idade" class="bg-gray-900 w-full p-3 rounded-xl mb-3 border-purple-950 outline-none" type="number" placeholder="Digite a idade do aluno">
+            <select style="display: none;" name="status" id="status" class="bg-gray-900 w-1/4 p-2 rounded-xl mb-3 border-purple-950 outline-none" >
+              <option selected value="Ativo">Ativo</option>
+              <option value="Trancado">Trancado</option>
+              <option value="Formado">Formado</option>
+            </select>
               <div class="flex justify-end gap-3">
-                <button type="button" class="btn border-purple-900 text-violet-400 bg-purple-600/10 shadow-none">Cancelar</button>
+                <button onclick="handleClose()" type="button" class="btn border-purple-900 text-violet-400 bg-purple-600/10 shadow-none">Cancelar</button>
                 <button id="buttonSalvar" type="button" onclick="handleAdd()" class="btn border-purple-900 text-violet-400 bg-purple-900 shadow-none">Salvar</button>
               </div>
           </form>

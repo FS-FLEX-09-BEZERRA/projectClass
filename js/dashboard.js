@@ -1,7 +1,7 @@
 
 
 
-const alunos = [
+let alunos = [
   {
     id: 1,
     nome: "Ana Silva",
@@ -36,22 +36,22 @@ const alunos = [
   }
 ];
 
-carregarAlunos()
+carregarAlunos(alunos)
 
 
-function carregarAlunos () {
-tabela.innerHTML = alunos.map((aluno, index) => {
-  const rowBg = index % 2 === 0
-    ? "bg-[#0F172A]"
-    : "bg-[#111827]";
+function carregarAlunos(alunos) {
+  tabela.innerHTML = alunos.map((aluno, index) => {
+    const rowBg = index % 2 === 0
+      ? "bg-[#0F172A]"
+      : "bg-[#111827]";
 
-  const statusStyle = {
-    "Ativo": "bg-purple-600/20 text-purple-400",
-    "Trancado": "bg-yellow-600/20 text-yellow-400",
-    "Formado": "bg-blue-600/20 text-blue-400"
-  };
+    const statusStyle = {
+      "Ativo": "bg-purple-600/20 text-purple-400",
+      "Trancado": "bg-yellow-600/20 text-yellow-400",
+      "Formado": "bg-blue-600/20 text-blue-400"
+    };
 
-  return `
+    return `
     <tr key=${index} class="grid grid-cols-6 items-center px-8 py-5 border-b border-purple-900/20 ${rowBg} hover:bg-purple-900/20 transition duration-300">
       <td class="flex items-center gap-3 font-medium text-white">
         <div class="w-9 h-9 rounded-full bg-linear-to-br from-purple-600 to-violet-500 
@@ -76,58 +76,92 @@ tabela.innerHTML = alunos.map((aluno, index) => {
       </td>
     </tr>
   `;
-}).join("");
+  }).join("");
 }
 
-function handleAdd () {
-  const tabela = document.getElementById('tabela')
+function handleAdd() {
   const nome = document.getElementById("nome").value
   const matricula = document.getElementById("matricula").value
   const curso = document.getElementById("curso").value
   const idade = document.getElementById("idade").value
   const modal = document.getElementById("my_modal_2")
-  
-  const novoId = alunos.length + 1
-  
-  const novoAluno = { id: novoId, nome, matricula, curso, idade, status: "Ativo" }
+  const status = document.getElementById("status").value
+  const titleModal = document.querySelector("#titleModal")
 
-  console.log(novoAluno)
+  if (EditingAluno) {
+    const aluno = alunos.find((a) => a.id === EditingAluno)
 
+    aluno.nome = nome
+    aluno.matricula = matricula
+    aluno.curso = curso
+    aluno.idade = idade
+    aluno.status = status
 
-  alunos.push(novoAluno)
-  modal.style.display = "none";
-  console.log(alunos)
-  carregarAlunos()
-  return
+    modal.style.display = "none";
+    EditingAluno = null
+    titleModal.innerHTML = "Adicionar Aluno"
+    carregarAlunos()
+  } else {
+    const novoId = alunos.length + 1
+    const novoAluno = { id: novoId, nome, matricula, curso, idade, status: "Ativo" }
+    console.log(novoAluno)
+    alunos.push(novoAluno)
+    modal.style.display = "none";
+    console.log(alunos)
+    carregarAlunos()
+  }
 }
 
-function handleEdit (id) {
+let EditingAluno = null
+function handleEdit(id) {
   const tabela = document.getElementById('tabela')
   const nome = document.getElementById("nome")
   const matricula = document.getElementById("matricula")
   const curso = document.getElementById("curso")
   const idade = document.getElementById("idade")
   const modal = document.getElementById("my_modal_2")
-  const buttonSalvar = document.getElementById("buttonSalvar")
+  const status = document.getElementById("status")
+  const titleModal = document.querySelector("#titleModal")
 
   console.log(id)
-  const aluno = alunos.find((a)=> a.id === id)
+  const aluno = alunos.find((a) => a.id === id)
   console.log(aluno)
-  const titleModal = document.querySelector("#titleModal")
   console.log(titleModal)
   titleModal.innerHTML = "Editar Aluno"
 
 
-    nome.value = aluno.nome,
+  nome.value = aluno.nome,
     matricula.value = aluno.matricula,
     curso.value = aluno.curso,
     idade.value = aluno.idade,
     status.value = aluno.status
 
-    buttonSalvar.onclick
+
+
+  EditingAluno = id;
+
+  status.style.display = 'block';
 
   modal.showModal()
 
 
   console.log(titleModal)
 }
+
+function handleClose() {
+  const modal = document.querySelector("#my_modal_2")
+  modal.style.display = "none";
+}
+
+function handleStatus() {
+  const status = document.querySelector("#statusFilter").value
+  
+  const alunosFiltrados = alunos.filter((a)=> a.status === status)
+
+
+  console.log(alunos)
+
+  carregarAlunos(alunosFiltrados)
+
+}
+
